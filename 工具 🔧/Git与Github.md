@@ -126,7 +126,19 @@ git config -e --global # 针对系统上所有仓库
 
 <img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gir7smqahnj319i0meag6.jpg" style="zoom: 38%;" />
 
-查看文件有没有添加成功，可以通过`git status`命令查看。
+查看文件有没有添加成功，可以通过`git status`命令查看，用`git diff`可以查看修改的内容。
+
+### 4.差异对比（了解）
+
+* `git diff`：比较暂存区与工作区。
+
+* `git diff --cached`：比较版本区与暂存区。
+
+* `git diff master`：比较版本区与工作区。
+
+
+
+
 
 
 
