@@ -200,9 +200,49 @@ Receiving objects: 100% (3/3), done.
 
 Git 支持多种协议，包括 `https`、`ssh`等，但 `ssh` 协议速度最快。
 
+### 8. 分支管理
 
+#### 8.1 创建与合并分支
 
+首先，我们创建 `dev` 分支，然后切换到 `dev` 分支：
 
+```shell
+git checkout -b dev
+```
+
+> `git checkout` 命令加上 `-b` 参数，表示创建并切换分支，相当于以下两条命令：
+>
+> ```shell
+> git branch dev
+> git checkout dev
+> ```
+
+用 `git branch ` 命令查看当前分支，`git branch` 命令会列出所有分支，当前分支前面会标一个`*`号。
+
+现在我们从 `dev` 分支切换回 `master` 分支：
+
+```shell
+git checkout master
+```
+
+把 `dev` 分支的工作成果合并到 `master` 分支上：
+
+```shell
+git merge dev
+```
+
+合并完分支后，就可以放心地删除 `dev` 分支：
+
+```shell
+git branch -d dev
+```
+
+删除完分支后，查看 `branch`，就只剩下`master`分支了：
+
+```shell
+$ git branch
+* master
+```
 
 
 
