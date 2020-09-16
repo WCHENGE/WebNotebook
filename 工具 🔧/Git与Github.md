@@ -244,6 +244,29 @@ $ git branch
 * master
 ```
 
+##### 小结：
+
+* 查看分支：`git branch`
+* 创建分支：`git branch <name>`
+* 切换分支：`git checkout <name>` 或者 `git switch -c <name>`
+* 创建 + 切换分支：`git checkout -b <name>` 或者 `git switch -c <name>`
+* 合并某个分支到当前分支：`git merge <name>`
+* 删除分支：`git branch -d <name>`
+
+#### 8.2 解决冲突
+
+使用 `git merge` 命令合并两个分支，当 Git 无法自动完成合并分支时，就必须首先解决冲突。解决完冲突后，再提交，合并分支。
+
+解决冲突就是把 Git 合并失败的文件手动编辑成我们希望的内容，再提交。
+
+用 `git log --graph` 命令可以看到分支合并图。
+
+
+
+
+
+
+
 
 
 
