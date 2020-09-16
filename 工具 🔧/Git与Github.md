@@ -144,10 +144,17 @@ git config -e --global # 针对系统上所有仓库
 ### 6. 版本回退 + 版本穿梭 + 版本撤销
 
 * `git reset --hard HEAD^`  版本回退（回退一次提交）。
-* `git reset --hard Obfafd `回退到指定 Obfafb 的 commit id 版本。
+
+  > 在 git 中，用 `HEAD` 表示当前版本，回退到上一个版本就是`HEAD^`，上上一个版本就是`HEAD^^`
+
+* `git reset --hard commit_id `回退到指定 commit_id 的 commit id 版本。
+
 * `git reset HEAD` 用**版本库**中的文件区替换**暂存区**的全部文件。
+
 * `git checkout -- x.txt` 用**暂存区指定文件区**替换**工作区的指定文件**。<span style="color:red">（危险）</span>
+
 * `git checkout HEAD x.txt` 用**版本库中的文件**替换**暂存区**和**工作区**的文件。<span style="color:red">（危险）</span>
+
 * `git rm --cached x.txt` 从**暂存区**删除文件。
 
 
