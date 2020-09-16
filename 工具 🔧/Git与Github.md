@@ -149,7 +149,7 @@ git config -e --global # 针对系统上所有仓库
 
 * `git reset --hard <commit_id> ` 回退到指定 commit_id 的 commit id 版本。
 
-* `git reset --staged <file>` 把暂存区的修改撤销掉（unstage），重新放回到工作区。
+* `git reset HEAD <file>` 把暂存区的修改撤销掉（unstage），重新放回到工作区。
 
 * `git reset HEAD` 用**版本库**中的文件区替换**暂存区**的全部文件。
 
@@ -165,6 +165,14 @@ git config -e --global # 针对系统上所有仓库
 * `git checkout HEAD <file>` 用**版本库中的文件**替换**暂存区**和**工作区**的文件。<span style="color:red">（危险）</span>
 
 * `git rm --cached <file>` 从**暂存区**删除文件。
+
+* `git rm <file>` 从版本库中删除该文件。
+
+  > 确定要从版本库中删除该文件，那就用命令`git rm`删掉，并且`git commit`。
+  >
+  > 💡小提示：先手动删除文件，然后使用 `git rm <file>`和`git add <file>`效果是一样的。
+  >
+  > ⚠️注意：从来没有被添加到版本库就被删除的文件，是无法恢复的！
 
 
 
