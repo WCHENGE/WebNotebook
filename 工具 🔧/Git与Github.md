@@ -174,6 +174,34 @@ git config -e --global # 针对系统上所有仓库
   >
   > ⚠️注意：从来没有被添加到版本库就被删除的文件，是无法恢复的！
 
+### 7. 远程仓库
+
+#### 7.1 添加远程库
+
+* 关联一个远程库，使用命令 `git remote add origin <github:url>`；
+
+* 关联后，使用命令 `git push -u origin master` 第一次☝️推送 master 分支的所有内容；
+
+  > 此后每次本地提交，只需要使用命令 `git push origin master` 推送最新修改。
+
+分布式版本系统的最大好处之一，是在本地工作完全不需要考虑远程库的存在，也就是有没有联网都可以正常工作（*而 SVN 在没有联网的时候是拒绝工作的*）。当有网络的时候，再把本地提交推送到远程库完成同步。
+
+#### 7.2 从远程库克隆
+
+要克隆一个仓库，首先必须知道仓库的地址，然后使用 `git clone` 命令克隆。
+
+```shell
+$ git clone git@github.com:michaelliao/gitskills.git
+Cloning into 'gitskills'...
+remote: Counting objects: 3, done.
+remote: Total 3 (delta 0), reused 0 (delta 0), pack-reused 3
+Receiving objects: 100% (3/3), done.
+```
+
+Git 支持多种协议，包括 `https`、`ssh`等，但 `ssh` 协议速度最快。
+
+
+
 
 
 
