@@ -198,7 +198,29 @@ remote: Total 3 (delta 0), reused 0 (delta 0), pack-reused 3
 Receiving objects: 100% (3/3), done.
 ```
 
-Git 支持多种协议，包括 `https`、`ssh`等，但 `ssh` 协议速度最快。
+*Git 支持多种协议，包括 `https`、`ssh`等，但 `ssh` 协议速度最快。*
+
+从远程库 clone 到本地，默认情况下只能看到 `master` 分支：（本地推送的分支如果不推送到远程，对于其他人就是不可见的。）
+
+```shell
+$ git branch
+* master
+```
+
+查看远程库的信息，用 `git remote` 命令：
+
+```shell
+$ git remote
+origin
+```
+
+或者用 `git remote -v` 显示更详细的信息：
+
+```shell
+$ git remote -v
+origin	https://github.com/xxx/***.git (fetch)
+origin	https://github.com/xxx/***.git (push)
+```
 
 ### 8. 分支管理
 
@@ -252,6 +274,7 @@ $ git branch
 * 创建 + 切换分支：`git checkout -b <name>` 或者 `git switch -c <name>`
 * 合并某个分支到当前分支：`git merge <name>`
 * 删除分支：`git branch -d <name>`
+* 强制删除分支：`git branch -D <name>` (*强行删除一个还未被合并的分支*)
 
 #### 8.2 解决冲突
 
@@ -297,6 +320,21 @@ git merge --no-ff -m "merge with no-ff" <branch>
 > 多次使用 stash ，需要恢复的时候，先用 `git stash list` 查看，然后恢复指定的 stash ，命令：`git stash apply stash@{0}`
 
 在 master 分支上修复的 bug ，想要合并到当前 dev 分支，可以用 `git cherry-pick <commit>` 命令，把 bug 提交的修改“复制”到当前分支，从而避免重复劳动。
+
+#### 8.5 多人协同
+
+多人👥协作的工作模式通常是：
+
+1. 首先，试图用 `git push origin <branch-name>` 推送自己的修改；
+2. 如果推送失败，则因为远程分支比你的本地更新，需要先用 `git pull` 试图合并；
+3. 如果合并有冲突，则解决冲突，并在本地提交；
+4. 没有冲突或者解决掉冲突后，再用 `git push origin <branch-name>` 推送就能成功！
+
+> 在本地创建和远程分支对应的分支，使用 `git checkout -b <branch> origin/<branch>`，本地和远程分支的名称最好一致。如果 `git pull` 提示 `no tracking information`，则说明本地分支和远程分支的链接关系没有创建，用命令 `git branch --set-upstream-to <branch-name> origin/<branch-name>`。
+
+
+
+
 
 
 
