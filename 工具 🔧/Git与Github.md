@@ -128,7 +128,7 @@ git config -e --global # 针对系统上所有仓库
 
 查看文件有没有添加成功，可以通过`git status`命令查看，用`git diff`可以查看修改的内容。
 
-### 4.差异对比（了解）
+### 4. 差异对比（了解）
 
 * `git diff`：比较暂存区与工作区。
 
@@ -136,6 +136,19 @@ git config -e --global # 针对系统上所有仓库
 
 * `git diff master`：比较版本区与工作区。
 
+###5. 日志 + 版本号
+
+* `git log`显示从最近到最远的说有提交日志。
+* `git reflog`显示每次提交（commit）的 commit id。
+
+### 6. 版本回退 + 版本穿梭 + 版本撤销
+
+* `git reset --hard HEAD^`  版本回退（回退一次提交）。
+* `git reset --hard Obfafd `回退到指定 Obfafb 的 commit id 版本。
+* `git reset HEAD` 用**版本库**中的文件区替换**暂存区**的全部文件。
+* `git checkout -- x.txt` 用**暂存区指定文件区**替换**工作区的指定文件**。<span style="color:red">（危险）</span>
+* `git checkout HEAD x.txt` 用**版本库中的文件**替换**暂存区**和**工作区**的文件。<span style="color:red">（危险）</span>
+* `git rm --cached x.txt` 从**暂存区**删除文件。
 
 
 
@@ -143,6 +156,16 @@ git config -e --global # 针对系统上所有仓库
 
 
 
+### 提交代码的规范
+
+* 每次提交前：先更新，在提交。
+* 敏感时间点，一定及时更新文件。
+* 多提交，避免“只关注写代码，不关注提交”的现象。
+* 每次提交必须书写清晰明了的提交说明。
+* 不要提交不能通过编译的代码。
+* 不要提交自己不明白的代码。
+* 慎用锁定功能（尽量避免使用锁，不轻易解锁上锁的文件）。
+* 不要提交本地自动生成的文件、文件夹。
 
 
 
