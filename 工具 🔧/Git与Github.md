@@ -281,7 +281,22 @@ $ git branch
 git merge --no-ff -m "merge with no-ff" <branch>
 ```
 
+#### 8.4 Bug 分支
 
+修复 bug 时，一般我们会通过创建新的 bug 分支进行修复，然后合并，最后删除。
+
+当手头工作还没有完成时，需要 `git stash` 命令保存工作现场，然后完成 bug 修复，再 `git stash pop` 命令回到工作现场。
+
+> `git stash list` 命令可以用来查看 stash 保存的内容。
+>
+> 需要恢复一下 stash 存放内容：
+>
+> * `git stash apply`：恢复后，stash 内容并不回删除，你需要手动用 `git stash drop` 命令来删除；
+> * `git stash pop`：恢复的同时把 stash 内容液删了。
+>
+> 多次使用 stash ，需要恢复的时候，先用 `git stash list` 查看，然后恢复指定的 stash ，命令：`git stash apply stash@{0}`
+
+在 master 分支上修复的 bug ，想要合并到当前 dev 分支，可以用 `git cherry-pick <commit>` 命令，把 bug 提交的修改“复制”到当前分支，从而避免重复劳动。
 
 
 
