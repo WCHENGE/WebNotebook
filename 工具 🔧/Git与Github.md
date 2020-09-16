@@ -145,17 +145,28 @@ git config -e --global # 针对系统上所有仓库
 
 * `git reset --hard HEAD^`  版本回退（回退一次提交）。
 
-  > 在 git 中，用 `HEAD` 表示当前版本，回退到上一个版本就是`HEAD^`，上上一个版本就是`HEAD^^`
+  > 在 git 中，用 `HEAD` 表示当前版本，回退到上一个版本就是`HEAD^`，上上一个版本就是`HEAD^^`（最多只能出现两个 `^^` ）
 
-* `git reset --hard commit_id `回退到指定 commit_id 的 commit id 版本。
+* `git reset --hard <commit_id> ` 回退到指定 commit_id 的 commit id 版本。
+
+* `git reset --staged <file>` 把暂存区的修改撤销掉（unstage），重新放回到工作区。
 
 * `git reset HEAD` 用**版本库**中的文件区替换**暂存区**的全部文件。
 
-* `git checkout -- x.txt` 用**暂存区指定文件区**替换**工作区的指定文件**。<span style="color:red">（危险）</span>
+* `git checkout -- <file>` 用**暂存区指定文件区**替换**工作区的指定文件**。<span style="color:red">（危险）</span>
 
-* `git checkout HEAD x.txt` 用**版本库中的文件**替换**暂存区**和**工作区**的文件。<span style="color:red">（危险）</span>
+  > 命令`git checkout -- <file>`意思就是把 file 文件在工作区的修改全部撤销，这里分两种情况：
+  >
+  > * 一种是，文件自修改后还没有被放到暂存区，现在撤销修改，就回到了和版本库一模一样的状态；
+  > * 另一种是，文件已经添加到暂存区后，又做了修改，现在撤销修改，就回到添加到暂存区后的状态。
+  >
+  > `git checkout -- <file>`命令中的`--`很重要，没有`--`，就变成了“切换到另一个分支”的命令。
 
-* `git rm --cached x.txt` 从**暂存区**删除文件。
+* `git checkout HEAD <file>` 用**版本库中的文件**替换**暂存区**和**工作区**的文件。<span style="color:red">（危险）</span>
+
+* `git rm --cached <file>` 从**暂存区**删除文件。
+
+
 
 
 
