@@ -5,7 +5,12 @@
 ### 1. “自由注意教皇”林纳斯·托瓦兹
 
 * Linux
+
+  > Linus在1991年创建了开源的Linux，从此，Linux系统不断发展，已经成为最大的服务器系统软件了。
+
 * Git 
+
+  > Linus花了两周时间自己用C写了一个分布式版本控制系统，这就是Git！一个月之内，Linux系统的源码已经由Git管理了！
 
 > 详细资料可参考：
 >
@@ -484,18 +489,6 @@ git config --global alias.st status
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 ### 提交代码的规范
 
 * 每次提交前：先更新，在提交。
@@ -504,8 +497,63 @@ git config --global alias.st status
 * 每次提交必须书写清晰明了的提交说明。
 * 不要提交不能通过编译的代码。
 * 不要提交自己不明白的代码。
-* 慎用锁定功能（尽量避免使用锁，不轻易解锁上锁的文件）。
 * 不要提交本地自动生成的文件、文件夹。
+
+[Git 常用命令清单](https://gitee.com/liaoxuefeng/learn-java/raw/master/teach/git-cheatsheet.pdf)
+
+
+
+## 总结：
+
+### 1. Git 与 SVN 的区别在哪里？
+
+> * git 和 svn 最大的区别在与 git 是分布式的，而 svn 是集中式的。因此我们不能在离线的情况下使用 svn 。如果服务器出现问题，我们就没有办法使用 snv 来提交和管理我们的代码。
+> * svn 中的分支是整个版本库复制的一份完整目录，而 git 的分支是指针指向某次提交，因此 git 的分支创建开销更小，并且分支上的变化不会影响到其他人，而 svn 的分支变化会影响到所有人。
+> * svn 的指令相对于 git 来说要简单一些，比 git 更容易上手。
+
+   详细资料可以参考：
+   [《对比 Git 与 SVN，这篇讲的很易懂》](https://juejin.im/post/5bd95bf4f265da392c5307eb)
+   [《GIT 与 SVN 世纪大战》](https://blog.csdn.net/github_33304260/article/details/80171456)
+   [《Git 学习小记之分支原理》](https://www.jianshu.com/p/e8ad60710017)
+
+### 2. Git 常用命令
+
+>`git int` 新建 git 代码库
+>
+>`git add <file>` 添加指定文件到暂存区
+>
+>`git rm` 删除工作区文件，并将这次删除放入暂存区
+>
+>`git commit -m <message>` 提交暂存区到仓库区
+>
+>`git branch` 列出所有分支
+>
+>`git checkout -b <branch>` 新建一个分支，并切换到该分支
+>
+>`git status` 显示有变更的文件
+
+ 详细资料可以参考：
+   [《常用 Git 命令清单》](http://www.ruanyifeng.com/blog/2015/12/git-cheat-sheet.html)
+
+### 3. git pull 和 git fetch 的区别
+
+> * git fetch 只是将远程仓库的变化下载下来，并没有和本地分支合并。
+>
+> * git pull 会将远程仓库的变化下载下来，并和当前分支合并。
+
+[《详解 git pull 和 git fetch 的区别》](https://blog.csdn.net/weixin_41975655/article/details/82887273)
+
+### 4. git rebase 和 git merge 的区别
+
+> git merge 和 git rebase 都是用于分支合并，关键在于 commit 记录处理上的不同。
+>
+> * git merge 会创建一个新的 commit 对象，然后两个分支以前的 commit 记录都指向这个新的 commit 记录。这种方法会保留之前每个分支的 commit 历史。
+> * git rebase 会先找到两个分支的第一个共同的 commit 祖先记录，随后将提取当前分支之后所有的 commit 记录，然后将这个 commit 记录添加到目标分支的最新提交后面。经过这样处理后，两个分支合并后的 commit 记录就变为线性的记录了。
+
+ [《git rebase 和 git merge 的区别》](https://www.jianshu.com/p/f23f72251abc)
+ [《git merge 与 git rebase 的区别》](https://blog.csdn.net/liuxiaoheng1992/article/details/79108233)
+
+
 
 
 
