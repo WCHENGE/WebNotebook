@@ -478,6 +478,10 @@ git config --global alias.st status
 
 `--global` 参数是全局参数，也就是这些命令在这台电脑的所有 Git 仓库下都有用。
 
+#### 11.3 搭建 Git 服务器
+
+[搭建 Git 服务器在线教程](https://www.liaoxuefeng.com/wiki/896043488029600/899998870925664)
+
 
 
 
