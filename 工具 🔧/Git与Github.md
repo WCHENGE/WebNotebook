@@ -431,7 +431,11 @@ Git 的标签虽然是版本库的快照，但其实它就是指向某个 commit
 * `git tag -d <tagname>` 删除一个本地分支。
 * `git push origin :refs/tags/<tagname>` 删除一个远程标签。
 
+### 10. 使用 GitHub
 
+* 在 GitHub 上，可以任意 Fork 开源仓库；
+* 自己拥有 Fork 后的仓库的读写权限；
+* 可以推送 pull request 给官方仓库来贡献代码。
 
 
 
