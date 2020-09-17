@@ -180,11 +180,67 @@ git config -e --global # 针对系统上所有仓库
 
 * 关联一个远程库，使用命令 `git remote add origin <github:url>`；
 
+  > 如果关联失败，说明本地库已经关联了一个远程库，可以用 `git remote -v` 查看远程库信息，然后删除已有的远程库 `git remote rm origin`。
+
 * 关联后，使用命令 `git push -u origin master` 第一次☝️推送 master 分支的所有内容；
 
   > 此后每次本地提交，只需要使用命令 `git push origin master` 推送最新修改。
 
 分布式版本系统的最大好处之一，是在本地工作完全不需要考虑远程库的存在，也就是有没有联网都可以正常工作（*而 SVN 在没有联网的时候是拒绝工作的*）。当有网络的时候，再把本地提交推送到远程库完成同步。
+
+> 一个本地库能不能既关联 Github ，又关联 Gitee 呢？
+>
+> 答案是肯定的，因为 git 本身是分布式版本控制系统，可以同步到另外一个远程库，当然也可以同步到另外两个远程库。
+>
+> 使用多个远程库时，需要注意的是，git 给远程库起的默认名称是 `origin`，如果有多个远程库，我们需要用不同的名称来标识不同的运程库。
+>
+> 先关联 GitHub 的远程库：
+>
+> ```shell
+> git remote add github https://github.com/xxx/***.git
+> ```
+>
+> 接着，再关联 Gitee 的远程库：
+>
+> ```shell
+> git remote add gitee https://gitee.com/xxx/***.git
+> ```
+>
+> 用 `git remote -v` 查看与那成库信息，可以看到两个远程库：
+>
+> ```shell
+> git remote -v
+> gitee https://gitee.com/xxx/***.git (fetch)
+> gitee https://gitee.com/xxx/***.git (push)
+> github https://github.com/xxx/***.git (fetch)
+> github https://github.com/xxx/***.git(push)
+> ```
+>
+> 如果要推送到 GitHub ，使用命令：
+>
+> ```shell
+> git push github master
+> ```
+>
+> 如果要推送到 Gitee ，使用命令：
+>
+> ```shell
+> git push gitee master
+> ```
+>
+> 本地库与多个远程库相互同步的关系：
+>
+> ```ascii
+> ┌─────────┐ ┌─────────┐
+> │ GitHub  │ │  Gitee  │
+> └─────────┘ └─────────┘
+>      ▲           ▲
+>      └─────┬─────┘
+>            │
+>     ┌─────────────┐
+>     │ Local Repo  │
+>     └─────────────┘
+> ```
 
 #### 7.2 从远程库克隆
 
@@ -374,6 +430,12 @@ Git 的标签虽然是版本库的快照，但其实它就是指向某个 commit
 
 * `git tag -d <tagname>` 删除一个本地分支。
 * `git push origin :refs/tags/<tagname>` 删除一个远程标签。
+
+
+
+
+
+
 
 
 
