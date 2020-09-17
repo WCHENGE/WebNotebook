@@ -349,11 +349,31 @@ git merge --no-ff -m "merge with no-ff" <branch>
 
 发布一个版本时，我们通常先在版本库中打一个标签（tag），这样就唯一确定了打标签时刻的版本。将来无论什么时候，取某个标签的版本，就是把那个标签的时刻的历史版本取出来。所以，标签也是版本库的一个快照。
 
-Git 的标签虽然是版本库的快照，但其实它就是指向某个 commit 的指针（跟分支很像对不对？但是分支可以移动，标签不能移动），所以，创建和删除标签都是瞬间完成的。
+Git 的标签虽然是版本库的快照，但其实它就是指向某个 commit 的指针（*跟分支很像对不对？但是分支可以移动，标签不能移动*），所以，创建和删除标签都是瞬间完成的。
 
+#### 9.1 创建标签
 
+* `git tag <tagname>` 用于新建一个标签，默认为 `HEAD` ，也可以指定一个 commit_id。
 
+  ```shell
+  git tag <tagname> <commit_id>
+  ```
 
+* `git tag` 查看所有标签。
+
+* `git tag -a <tagname> -m "balabala..." [<commit_id>]` 指定标签信息。
+
+* `git show <tagname>` 查看标签信息。（*标签不是按时间顺序列出，而是按字母排序的*）
+
+  > ⚠️注意：标签总是和某个 commit 挂钩的。如果这个 commit 既出现在 master 分支，又出现在 dev 分支，那么在这两个分支上都可以看到这个标签。
+
+#### 9.2 操作标签
+
+* `git push origin <tagname>` 推送一个本地标签。
+* `git push origin --tags` 推送全部未推送过的本地标签。
+
+* `git tag -d <tagname>` 删除一个本地分支。
+* `git push origin :refs/tags/<tagname>` 删除一个远程标签。
 
 
 
