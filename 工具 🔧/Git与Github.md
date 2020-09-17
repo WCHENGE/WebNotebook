@@ -137,16 +137,16 @@ git config -e --global # 针对系统上所有仓库
 
 ### 4. 差异对比（了解）
 
-* `git diff`：比较暂存区与工作区。
+* `git diff`：显示暂存区与工作区的差异。
 
-* `git diff --cached`：比较版本区与暂存区。
+* `git diff --cached [file]`：显示暂存区和上一个 commit 的差异。
 
-* `git diff master`：比较版本区与工作区。
+* `git diff HEAD`：显示工作区与当前分支最新 commit 之间的差异。
 
-###5. 日志 + 版本号
+###5. 日志
 
-* `git log`显示从最近到最远的说有提交日志。
-* `git reflog`显示每次提交（commit）的 commit id。
+* `git log`显示当前分支从最近到最远的所有提交日志。
+* `git reflog`显示当前分支的每次提交（commit）的 commit id。
 
 ### 6. 版本回退 + 版本穿梭 + 版本撤销
 
@@ -333,7 +333,7 @@ $ git branch
 
 * 查看分支：`git branch`
 * 创建分支：`git branch <name>`
-* 切换分支：`git checkout <name>` 或者 `git switch -c <name>`
+* 切换分支：`git checkout <name>` 或者 `git switch <name>`
 * 创建 + 切换分支：`git checkout -b <name>` 或者 `git switch -c <name>`
 * 合并某个分支到当前分支：`git merge <name>`
 * 删除分支：`git branch -d <name>`
