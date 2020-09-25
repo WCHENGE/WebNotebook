@@ -2,7 +2,7 @@
 
 ## 第 1 章：Git 的起源
 
-### 1. “自由注意教皇”林纳斯·托瓦兹
+### 1. “自由主义教皇”林纳斯·托瓦兹
 
 * Linux
 
@@ -14,19 +14,19 @@
 
 > 详细资料可参考：
 >
-> [Git 的诞生](https://www.liaoxuefeng.com/wiki/896043488029600/896202815778784)
+> * [Git 的诞生](https://www.liaoxuefeng.com/wiki/896043488029600/896202815778784)
+> * [Git 简史](https://git-scm.com/book/zh/v2/%E8%B5%B7%E6%AD%A5-Git-%E7%AE%80%E5%8F%B2)
 >
-> [Git 简史](https://git-scm.com/book/zh/v2/%E8%B5%B7%E6%AD%A5-Git-%E7%AE%80%E5%8F%B2)
 
 ### 2.Git 是什么？
 
 * Git 是目前世界上最先进的分布式版本控制（没有之一）。
 
->详细资料可参考：
+> 详细资料可参考：
 >
->[ Git 是什么？](https://git-scm.com/book/zh/v2/%E8%B5%B7%E6%AD%A5-Git-%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F)
+> * [ Git 是什么？](https://git-scm.com/book/zh/v2/%E8%B5%B7%E6%AD%A5-Git-%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F)
+> * [Git 简介](https://www.liaoxuefeng.com/wiki/896043488029600/896067008724000)
 >
->[Git 简介](https://www.liaoxuefeng.com/wiki/896043488029600/896067008724000)
 
 ## 第 2 章：GIt 的使用
 
@@ -42,7 +42,7 @@ Git 各平台安装包下载地址为：[http://git-scm.com/downloads](http://gi
 
 Git 提供了一个叫做 `git config` 的工具，专门用来配置或读取相应的工作环境变量。
 
-这些环境变量，决定了 Git 在各个环节的具体工作方式和行为。这希望变量可以存放在以下三个不同的地方：
+这些环境变量，决定了 Git 在各个环节的具体工作方式和行为。环境变量可以存放在以下三个不同的地方：
 
 * `/etc/gitconfig` 文件：系统中对所有用户都普遍使用的配置。若使用 git config 时用 --system 选项，读写的就是这个文件。
 * `~/.gitconfig` 文件：用户目录下的配置文件只适用于该用户。若使用 git config 时用 --global 选项，读写的就是这个文件。
@@ -81,11 +81,11 @@ git config -e --global # 针对系统上所有仓库
 
 或要检查已有的配置，可以使用 `git config --list` 命令。
 
-###2. Git 工作区、暂存区和版本区
+### 2. Git 工作区、暂存区和版本区
 
 先来理解一下 Git 工作区、暂存区和版本库概念：
 
-* 工作区（workig Directory）：就是你在电脑里能看到的目录。
+* 工作区（working Directory）：就是你在电脑里能看到的目录。
 * 暂存区（stage）：介于工作区和版本区中间，工作区到版本区的“必经之路”。一般存放在`.git`目录下的 index 文件中 （.git/index），所以我们把暂存区有时也叫作索引（index）。
 * 版本区（Repository）：工作区有一个隐藏目录`.git`，准确的来说这个不算工作区，而是 Git 的版本库。
 
@@ -131,7 +131,7 @@ git config -e --global # 针对系统上所有仓库
 
   > 简单解释一下`git commit`命令，`-m`后面输入的是本次提交的说明，可以输入任意内容，当然最好是有意义的，这样你就能从历史记录里方便地找到改动记录。
 
-<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gir7smqahnj319i0meag6.jpg" style="zoom: 38%;" />
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gir7smqahnj319i0meag6.jpg" style="zoom: 30%;" />
 
 查看文件有没有添加成功，可以通过`git status`命令查看，用`git diff`可以查看修改的内容。
 
@@ -143,7 +143,7 @@ git config -e --global # 针对系统上所有仓库
 
 * `git diff HEAD`：显示工作区与当前分支最新 commit 之间的差异。
 
-###5. 日志
+### 5. 日志
 
 * `git log`显示当前分支从最近到最远的所有提交日志。
 * `git reflog`显示当前分支的每次提交（commit）的 commit id。
@@ -213,7 +213,7 @@ git config -e --global # 针对系统上所有仓库
 > git remote add gitee https://gitee.com/xxx/***.git
 > ```
 >
-> 用 `git remote -v` 查看与那成库信息，可以看到两个远程库：
+> 用 `git remote -v` 查看关联的远程库信息，可以看到两个远程库：
 >
 > ```shell
 > git remote -v
@@ -378,7 +378,7 @@ git merge --no-ff -m "merge with no-ff" <branch>
 > 需要恢复一下 stash 存放内容：
 >
 > * `git stash apply`：恢复后，stash 内容并不回删除，你需要手动用 `git stash drop` 命令来删除；
-> * `git stash pop`：恢复的同时把 stash 内容液删了。
+> * `git stash pop`：恢复的同时把 stash 内容删了。
 >
 > 多次使用 stash ，需要恢复的时候，先用 `git stash list` 查看，然后恢复指定的 stash ，命令：`git stash apply stash@{0}`
 
@@ -466,7 +466,7 @@ Git 的标签虽然是版本库的快照，但其实它就是指向某个 commit
 > git add -f <file>
 > ```
 >
-> 活着你发现，可能是 `.gitigonre` 写得有问题，需要找出来到底哪个规则写错了，可以用`git check-ignore` 命令检查：
+> 或者你发现，可能是 `.gitigonre` 写得有问题，需要找出来到底哪个规则写错了，可以用`git check-ignore` 命令检查：
 >
 > ```shell
 > $ git check-ignore -v xxx.class
@@ -518,19 +518,19 @@ git config --global alias.st status
 
 ### 2. Git 常用命令
 
->`git int` 新建 git 代码库
+> * `git init` 新建 git 代码库
 >
->`git add <file>` 添加指定文件到暂存区
+>* `git add <file>` 添加指定文件到暂存区
 >
->`git rm` 删除工作区文件，并将这次删除放入暂存区
+>* `git rm` 删除工作区文件，并将这次删除放入暂存区
 >
->`git commit -m <message>` 提交暂存区到仓库区
+>* `git commit -m <message>` 提交暂存区到仓库区
 >
->`git branch` 列出所有分支
+>* `git branch` 列出所有分支
 >
->`git checkout -b <branch>` 新建一个分支，并切换到该分支
+>* `git checkout -b <branch>` 新建一个分支，并切换到该分支
 >
->`git status` 显示有变更的文件
+>* `git status` 显示有变更的文件
 
  详细资料可以参考：
    [《常用 Git 命令清单》](http://www.ruanyifeng.com/blog/2015/12/git-cheat-sheet.html)
@@ -547,13 +547,11 @@ git config --global alias.st status
 
 > git merge 和 git rebase 都是用于分支合并，关键在于 commit 记录处理上的不同。
 >
-> * git merge 会创建一个新的 commit 对象，然后两个分支以前的 commit 记录都指向这个新的 commit 记录。这种方法会保留之前每个分支的 commit 历史。
+> * git merge 会创建一个新的 commit 对象，然后将两个分支以前的 commit 记录都指向这个新的 commit 记录。这种方法会保留之前每个分支的 commit 历史。
 > * git rebase 会先找到两个分支的第一个共同的 commit 祖先记录，随后将提取当前分支之后所有的 commit 记录，然后将这个 commit 记录添加到目标分支的最新提交后面。经过这样处理后，两个分支合并后的 commit 记录就变为线性的记录了。
 
  [《git rebase 和 git merge 的区别》](https://www.jianshu.com/p/f23f72251abc)
  [《git merge 与 git rebase 的区别》](https://blog.csdn.net/liuxiaoheng1992/article/details/79108233)
-
-
 
 
 
