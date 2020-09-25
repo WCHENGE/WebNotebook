@@ -384,3 +384,128 @@ ReactDOM.render(
 
 ## 7. 条件渲染
 
+React 中的条件渲染和 JavaScript 中的一样，使用 JavaScript 运算符 [`if`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/if...else) 或者[条件运算符](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Operators/Conditional_Operator)去创建元素来表现当前的状态，然后让 React 根据它们来更新 UI。
+
+```react
+function Greeting(props) {
+  const isLoggedIn = props.isLoggedIn;
+  if (isLoggedIn) {
+    return <UserGreeting />;
+  }
+  return <GuestGreeting />;
+}
+
+ReactDOM.render(
+  // Try changing to isLoggedIn={true}:
+  <Greeting isLoggedIn={false} />,
+  document.getElementById('root')
+);
+```
+
+声明一个变量并使用 `if` 语句进行条件渲染是不错的方式，但有时你可能会想使用更为简洁的语法。接下来，我们将介绍几种在 JSX 中内联条件渲染的方法。
+
+* 与运算符 &&
+
+  如果条件是 `true`，`&&` 右侧的元素就会被渲染，如果是 `false`，React 会忽略并跳过它。
+
+  ```react
+  function Mailbox(props) {
+    const unreadMessages = props.unreadMessages;
+    return (
+      <div>
+        <h1>Hello!</h1>
+        {unreadMessages.length > 0 &&
+          <h2>
+            You have {unreadMessages.length} unread messages.
+          </h2>
+        }
+      </div>
+    );
+  }
+  
+  const messages = ['React', 'Re: React', 'Re:Re: React'];
+  ReactDOM.render(
+    <Mailbox unreadMessages={messages} />,
+    document.getElementById('root')
+  );
+  ```
+
+* 三元运算符
+
+  另一种内联条件渲染的方法是使用 JavaScript 中的三元运算符 [`condition ? true : false`](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Operators/Conditional_Operator)。
+
+  ```react
+  render() {
+    const isLoggedIn = this.state.isLoggedIn;
+    return (
+      <div>
+        {isLoggedIn
+          ? <LogoutButton onClick={this.handleLogoutClick} />
+          : <LoginButton onClick={this.handleLoginClick} />
+        }
+      </div>
+    );
+  }
+  
+  ```
+
+* 阻止组件渲染
+
+  在极少数情况下，你可能希望能隐藏组件，即使它已经被其他组件渲染。若要完成此操作，你可以让 `render` 方法直接返回 `null`，而不进行任何渲染。
+
+  ```react
+  function WarningBanner(props) {
+    if (!props.warn) {
+      return null;
+    }
+  
+    return (
+      <div className="warning">
+        Warning!
+      </div>
+    );
+  }
+  
+  class Page extends React.Component {
+    constructor(props) {
+      super(props);
+      this.state = {showWarning: true};
+      this.handleToggleClick = this.handleToggleClick.bind(this);
+    }
+  
+    handleToggleClick() {
+      this.setState(state => ({
+        showWarning: !state.showWarning
+      }));
+    }
+  
+    render() {
+      return (
+        <div>
+          <WarningBanner warn={this.state.showWarning} />
+          <button onClick={this.handleToggleClick}>
+            {this.state.showWarning ? 'Hide' : 'Show'}
+          </button>
+        </div>
+      );
+    }
+  }
+  
+  ReactDOM.render(
+    <Page />,
+    document.getElementById('root')
+  );
+  ```
+
+  > 在组件的 `render` 方法中返回 `null` 并不会影响组件的生命周期。例如，上面这个示例中，`componentDidUpdate` 依然会被调用。
+
+
+
+
+
+
+
+
+
+
+
