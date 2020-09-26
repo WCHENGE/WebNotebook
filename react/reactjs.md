@@ -499,7 +499,367 @@ ReactDOM.render(
 
   > 在组件的 `render` 方法中返回 `null` 并不会影响组件的生命周期。例如，上面这个示例中，`componentDidUpdate` 依然会被调用。
 
+## 8. 列表 & Key
 
+### 渲染多个组件
+
+你可以通过使用 `{}` 在 JSX 内构建一个元素集合。
+
+```react
+function NumberList(props) {
+  const numbers = props.numbers;
+  const listItems = numbers.map((number) =>
+    <li key={number.toString()}>
+      {number}
+    </li>
+  );
+  return (
+    <ul>{listItems}</ul>
+  );
+}
+
+const numbers = [1, 2, 3, 4, 5];
+ReactDOM.render(
+  <NumberList numbers={numbers} />,
+  document.getElementById('root')
+);
+```
+
+### key
+
+* key 帮助 React 识别哪些元素改变了，比如被添加或删除。因此你应当给数组中的每一个元素赋予一个确定的标识。
+
+  ```react
+  const numbers = [1, 2, 3, 4, 5];
+  const listItems = numbers.map((number) =>
+    <li key={number.toString()}>
+      {number}
+    </li>
+  );
+  ```
+
+* 一个元素的 key 最好是这个元素在列表中拥有的一个独一无二的字符串。
+
+  ```react
+  const todoItems = todos.map((todo) =>
+    <li key={todo.id}>
+      {todo.text}
+    </li>
+  );
+  ```
+
+* 当元素没有确定 id 的时候，万不得已你可以使用元素索引 index 作为 key。
+
+  ```react
+  const todoItems = todos.map((todo, index) =>
+    // Only do this if items have no stable IDs
+    <li key={index}>
+      {todo.text}
+    </li>
+  );
+  ```
+
+  > 如果列表项目的顺序可能会变化，我们不建议使用索引来用作 key 值，因为这样做会导致性能变差，还可能引起组件状态的问题。
+
+#### 用 key 提取组件
+
+元素的 key 只有放在就近的数组上下文中才有意义。
+
+> 比方说，如果你[提取](https://zh-hans.reactjs.org/docs/components-and-props.html#extracting-components)出一个 `ListItem` 组件，你应该把 key 保留在数组中的这个 `<ListItem />` 元素上，而不是放在 `ListItem` 组件中的 `<li>` 元素上。
+
+#### key 只是在兄弟节点之间必须唯一
+
+数组元素中使用的 key 在其兄弟节点之间应该是独一无二的。然而，它们不需要是全局唯一的。当我们生成两个不同的数组时，我们可以使用相同的 key 值：
+
+```react
+function Blog(props) {
+  const sidebar = (
+    <ul>
+      {props.posts.map((post) =>
+        <li key={post.id}>
+          {post.title}
+        </li>
+      )}
+    </ul>
+  );
+  const content = props.posts.map((post) =>
+    <div key={post.id}>
+      <h3>{post.title}</h3>
+      <p>{post.content}</p>
+    </div>
+  );
+  return (
+    <div>
+      {sidebar}
+      <hr />
+      {content}
+    </div>
+  );
+}
+
+const posts = [
+  {id: 1, title: 'Hello World', content: 'Welcome to learning React!'},
+  {id: 2, title: 'Installation', content: 'You can install React from npm.'}
+];
+ReactDOM.render(
+  <Blog posts={posts} />,
+  document.getElementById('root')
+);
+```
+
+key 会传递信息给 React ，但不会传递给你的组件。如果你的组件中需要使用 `key` 属性的值，请用其他属性名显式传递这个值：
+
+```react
+const content = posts.map((post) =>
+  <Post
+    key={post.id}
+    id={post.id}
+    title={post.title} />
+);
+```
+
+上面例子中，`Post` 组件可以读出 `props.id`，但是不能读出 `props.key`。
+
+## 9. 表单
+
+### 受控组件
+
+使 React 的 state 成为“唯一数据源”。渲染表单的 React 组件还控制着用户输入过程中表单发生的操作。被 React 以这种方式控制取值的表单输入元素就叫做“受控组件”。
+
+```react
+class NameForm extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {value: ''};
+
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleChange(event) {
+    this.setState({value: event.target.value});
+  }
+
+  handleSubmit(event) {
+    alert('提交的名字: ' + this.state.value);
+    event.preventDefault();
+  }
+
+  render() {
+    return (
+      <form onSubmit={this.handleSubmit}>
+        <label>
+          名字:
+          <input type="text" value={this.state.value} onChange={this.handleChange} />
+        </label>
+        <input type="submit" value="提交" />
+      </form>
+    );
+  }
+}
+```
+
+#### 默认值
+
+在受控组件上指定 value 的 prop 会阻止用户更改输入。如果你指定了 `value` ，但输入仍可编辑，则可能是你意外地将 `value` 设置为 `undefined` 或 `null`。
+
+```react
+// 不可编辑
+ReactDOM.render(<input value="hi" />, mountNode);
+// 可编辑
+ReactDOM.render(<input value={null} /> mountNode>);
+```
+
+### 非受控组件
+
+要编写一个非受控组件，而不是为每个状态更新都编写数据处理函数，你可以 [使用 ref](https://zh-hans.reactjs.org/docs/refs-and-the-dom.html) 来从 DOM 节点中获取表单数据。
+
+```react
+class NameForm extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.input = React.createRef();
+  }
+
+  handleSubmit(event) {
+    alert('A name was submitted: ' + this.input.current.value);
+    event.preventDefault();
+  }
+
+  render() {
+    return (
+      <form onSubmit={this.handleSubmit}>
+        <label>
+          Name:
+          <input type="text" ref={this.input} />
+        </label>
+        <input type="submit" value="Submit" />
+      </form>
+    );
+  }
+}
+
+```
+
+#### 默认值
+
+在 React 渲染生命周期时，表单元素上的 `value` 将会覆盖 DOM 节点中的值，在非受控组件中，你经常希望 React 能赋予组件一个初始值，但是不去控制后续的更新。 在这种情况下, 你可以指定一个 `defaultValue` 属性，而不是 `value`。
+
+```react
+render() {
+  return (
+    <form onSubmit={this.handleSubmit}>
+      <label>
+        Name:
+        <input
+          defaultValue="Bob"
+          type="text"
+          ref={this.input} />
+      </label>
+      <input type="submit" value="Submit" />
+    </form>
+  );
+}
+```
+
+## 10. 状态提升
+
+通常，多个组件需要反映相同的变化数据，这时可以将共享状态提升到最近的共同父组件中去。
+
+
+
+## 11. 组合 VS 继承
+
+React 推荐我们使用组合而非继承来实现组件间的代码重用。
+
+### 包含关系
+
+#### 使用一个特殊的 `children` prop 来将它们的子组件传递到渲染结果中：
+
+```react
+function FancyBorder(props) {
+	return (
+  	<div className={'FancyBorder FancyBorder-' + props.color}>
+      {props.children}
+    </div>
+  );
+}
+
+function WelcomeDialog() {
+	return (
+  	<FancyBorder color="blue">
+      <h1 className="Dialog-title">Welcome</h1>
+      <p className="Dialog-message">
+        Thank you for visiting our spacecrafe!
+      </p>
+    </FancyBorder>
+  );
+}
+```
+
+#### 自行约定：将所需内容传入 props，并使用相应的 prop：
+
+```react
+function SplitPane(props) {
+	return (
+  	<div className="SplitPane">
+      <div className="SplitPane-left">{props.left}</div>
+    	<div className="SplitPane-right">{props.right}</div>
+    </div>
+  );
+}
+
+function App() {
+	return (
+  	<SplitPane 
+      left={<Contacts />}
+      right={<Chat />}
+      />
+  );
+}
+```
+
+### 特例关系
+
+#### “特殊“组件可以通过 props 定制并渲染”一般”组件：
+
+```react
+function Dialog(props) {
+  return (
+    <FancyBorder color="blue">
+      <h1 className="Dialog-title">
+        {props.title}
+      </h1>
+      <p className="Dialog-message">
+        {props.message}
+      </p>
+    </FancyBorder>
+  );
+}
+
+function WelcomeDialog() {
+  return (
+    <Dialog
+      title="Welcome"
+      message="Thank you for visiting our spacecraft!" />
+  );
+}
+```
+
+#### 组合也同样适用于以 class 形式定义的组件：
+
+```react
+function Dialog(props) {
+  return (
+    <FancyBorder color="blue">
+      <h1 className="Dialog-title">
+        {props.title}
+      </h1>
+      <p className="Dialog-message">
+        {props.message}
+      </p>
+      {props.children}
+    </FancyBorder>
+  );
+}
+
+class SignUpDialog extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSignUp = this.handleSignUp.bind(this);
+    this.state = {login: ''};
+  }
+
+  render() {
+    return (
+      <Dialog title="Mars Exploration Program"
+              message="How should we refer to you?">
+        <input value={this.state.login}
+               onChange={this.handleChange} />
+        <button onClick={this.handleSignUp}>
+          Sign Me Up!
+        </button>
+      </Dialog>
+    );
+  }
+
+  handleChange(e) {
+    this.setState({login: e.target.value});
+  }
+
+  handleSignUp() {
+    alert(`Welcome aboard, ${this.state.login}!`);
+  }
+}
+```
+
+### 继承
+
+React 不推荐我们使用继承来构建组件层次。
+
+Props 和组合为我们提供了清晰而安全地定制组件外观和行为的灵活方式。注意：组件可以接受任意 props，包括基本数据类型，React 元素以及函数。
 
 
 
