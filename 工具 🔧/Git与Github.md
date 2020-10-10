@@ -20,7 +20,7 @@
 
 ### 2.Git 是什么？
 
-* Git 是目前世界上最先进的分布式版本控制（没有之一）。
+* Git 是目前世界上最先进的分布式版本控制系统（没有之一）。
 
 > 详细资料可参考：
 >
@@ -193,7 +193,7 @@ git config -e --global # 针对系统上所有仓库
 
   > 此后每次本地提交，只需要使用命令 `git push origin master` 推送最新修改。
 
-分布式版本系统的最大好处之一，是在本地工作完全不需要考虑远程库的存在，也就是有没有联网都可以正常工作（*而 SVN 在没有联网的时候是拒绝工作的*）。当有网络的时候，再把本地提交推送到远程库完成同步。
+分布式版本系统的最大好处之一，是在本地工作完全不需要考虑远程库的存在，也就是有没有联网都可以正常工作（*而 SVN 在没有联网的时候是拒绝工作的*）。当有网络的时候，再把本地库提交推送到远程库完成同步。
 
 > 一个本地库能不能既关联 Github ，又关联 Gitee 呢？
 >
@@ -343,7 +343,7 @@ $ git branch
 
 使用 `git merge` 命令合并两个分支，当 Git 无法自动完成合并分支时，就必须首先解决冲突。解决完冲突后，再提交，合并分支。
 
-解决冲突就是把 Git 合并失败的文件手动编辑成我们希望的内容，再提交。
+**解决冲突**就是把 Git 合并失败的文件手动编辑成我们希望的内容，再提交。
 
 用 `git log --graph` 命令可以看到分支合并图。
 
@@ -377,19 +377,19 @@ git merge --no-ff -m "merge with no-ff" <branch>
 >
 > 需要恢复一下 stash 存放内容：
 >
-> * `git stash apply`：恢复后，stash 内容并不回删除，你需要手动用 `git stash drop` 命令来删除；
+> * `git stash apply`：恢复后，stash 内容并不会删除，你需要手动用 `git stash drop` 命令来删除；
 > * `git stash pop`：恢复的同时把 stash 内容删了。
 >
 > 多次使用 stash ，需要恢复的时候，先用 `git stash list` 查看，然后恢复指定的 stash ，命令：`git stash apply stash@{0}`
 
-在 master 分支上修复的 bug ，想要合并到当前 dev 分支，可以用 `git cherry-pick <commit>` 命令，把 bug 提交的修改“复制”到当前分支，从而避免重复劳动。
+在 master 分支上修复的 bug ，想要合并到当前 dev 分支，可以用 `git cherry-pick <commit_id>` 命令，把 bug 提交的修改“复制”到当前分支，从而避免重复劳动。
 
 #### 8.5 多人协同
 
 多人👥协作的工作模式通常是：
 
 1. 首先，试图用 `git push origin <branch-name>` 推送自己的修改；
-2. 如果推送失败，则因为远程分支比你的本地更新，需要先用 `git pull` 试图合并；
+2. 如果推送失败，则因为远程分支比你的本地分支新，需要先用 `git pull` 试图合并；
 3. 如果合并有冲突，则解决冲突，并在本地提交；
 4. 没有冲突或者解决掉冲突后，再用 `git push origin <branch-name>` 推送就能成功！
 
@@ -452,7 +452,7 @@ Git 的标签虽然是版本库的快照，但其实它就是指向某个 commit
 
   >[GitHub 在线的各种`.gitignore` 配置文件](https://github.com/github/gitignore)
 
-* `.gitignore` 文件本身要放在版本库里，并且可以对 `.gitnore` 做版本管理。
+* `.gitignore` 文件本身要放在版本库里，并且可以对 `.gitignore` 做版本管理。
 
 * 忽略文件的原则：
 
