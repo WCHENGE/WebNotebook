@@ -138,15 +138,14 @@ git config -e --global # 针对系统上所有仓库
 ### 4. 差异对比（了解）
 
 * `git diff`：显示暂存区与工作区的差异。
-
 * `git diff --cached [file]`：显示暂存区和上一个 commit 的差异。
-
 * `git diff HEAD`：显示工作区与当前分支最新 commit 之间的差异。
 
 ### 5. 日志
 
 * `git log`显示当前分支从最近到最远的所有提交日志。
 * `git reflog`显示当前分支的每次提交（commit）的 commit id。
+* `git log --graph` 显示完整分支合并图。
 
 ### 6. 版本回退 + 版本穿梭 + 版本撤销
 
@@ -177,7 +176,7 @@ git config -e --global # 针对系统上所有仓库
 
   > 确定要从版本库中删除该文件，那就用命令`git rm`删掉，并且`git commit`。
   >
-  > 💡小提示：先手动删除文件，然后使用 `git rm <file>`和`git add <file>`效果是一样的。
+  > 💡小提示：先手动删除文件，然后使用 `git add <file>`和`git rm <file>`效果是一样的。
   >
   > ⚠️注意：从来没有被添加到版本库就被删除的文件，是无法恢复的！
 
@@ -285,6 +284,14 @@ origin	https://github.com/xxx/***.git (fetch)
 origin	https://github.com/xxx/***.git (push)
 ```
 
+#### 小结：
+
+* 关联远程仓库：`git remote add origin <github:url>`
+* 取消本地关联的远程库：`git remote removeorigin`
+* 查看本地关联的远程库信息：`git remote -v`
+* 第一次将本地库推送到远程库：`git push -u origin master`
+* 之后每次推送本地库到远程库：`git push origin master`
+
 ### 8. 分支管理
 
 #### 8.1 创建与合并分支
@@ -332,12 +339,14 @@ $ git branch
 ##### 小结：
 
 * 查看分支：`git branch`
-* 创建分支：`git branch <name>`
-* 切换分支：`git checkout <name>` 或者 `git switch <name>`
-* 创建 + 切换分支：`git checkout -b <name>` 或者 `git switch -c <name>`
-* 合并某个分支到当前分支：`git merge <name>`
-* 删除分支：`git branch -d <name>`
-* 强制删除分支：`git branch -D <name>` (*强行删除一个还未被合并的分支*)
+* 查看本地和远程所有分支：`git branch -a`
+* 创建分支：`git branch <branch-name>`
+* 切换分支：`git checkout <branch-name>` 或者 `git switch <branch-name>`
+* 创建 + 切换分支：`git checkout -b <branch-name>` 或者 `git switch -c <branch-name>`
+* 合并某个分支到当前分支：`git merge <branch-name>`
+* 删除分支：`git branch -d <branch-name>`
+* 强制删除分支：`git branch -D <branch-name>` (*强行删除一个还未被合并的分支*)
+* 删除远程分支：`git push origin --delete <branch-name>`
 
 #### 8.2 解决冲突
 
@@ -435,7 +444,7 @@ Git 的标签虽然是版本库的快照，但其实它就是指向某个 commit
 * `git push origin <tagname>` 推送一个本地标签。
 * `git push origin --tags` 推送全部未推送过的本地标签。
 
-* `git tag -d <tagname>` 删除一个本地分支。
+* `git tag -d <tagname>` 删除一个本地标签。
 * `git push origin :refs/tags/<tagname>` 删除一个远程标签。
 
 ### 10. 使用 GitHub

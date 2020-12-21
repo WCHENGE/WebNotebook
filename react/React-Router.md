@@ -2,7 +2,7 @@
 
 React Router 现在已经被划分成了三个包：`react-router`，`react-router-dom`，`react-router-native`。
 
-在React router中有三种类型的组件，一是`路由组件` ，第二种是`路径匹配组件` ，第三种是`导航组件`。
+在 React router 中有三种类型的组件，一是`路由组件` ，第二种是`路径匹配组件` ，第三种是`导航组件`。
 
 路由组件: `BrowserRouter` 和 `HashRouter`
 
@@ -245,13 +245,13 @@ react-router-dom 不会主动将 query 帮我们解析成对象，如果使用 q
 
 注：不需要配置路由表。
 
-> 路由表中的内容照常：`<Route path='/sort' component={Sort}></Route>`
+> 路由表中的内容照常：`<Route pathname='/sort' component={Sort}></Route>`
 
 1. Link 处
 
    ```react
    // HTML 方式
-   <Link to={{path:'/sort', query: {name: 'sunny'}}}></Link>
+   <Link to={{pathname:'/sort', query: {name: 'sunny'}}}></Link>
    ```
 
    ```javascript
@@ -273,7 +273,7 @@ react-router-dom 不会主动将 query 帮我们解析成对象，如果使用 q
 
    ```react
    // HTML 方式
-   <Link to={{ path: '/sort', state: {name: 'sunny'}}}></Link>
+   <Link to={{ pathname: '/sort', state: {name: 'sunny'}}}></Link>
    
    // JS 方式
    this.props.history.push({pathname: '/sort', state: {name: 'sunny'}})

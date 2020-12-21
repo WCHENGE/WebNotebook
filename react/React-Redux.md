@@ -5,7 +5,7 @@
 ### 三个基本原则
 
 * 整个应用只有唯一一个可信数据元，也就是只有一个 Store
-* State 只能通过触发 Action 来更该
+* State 只能通过触发 Action 来更改
 * State 的更改必须写成纯函数，也就是每次更改总是返回一个新的 State，在 Redux 里这种函数称为 Reducer
 
 ### Actions
@@ -169,7 +169,7 @@ Redux 官方提供了 [react-redux](https://github.com/rackt/react-redux) 来简
 
 `<Provider>` 作为一个容器组件，用来接受 Store，并且让 Store 对子组件可用，用法如下：
 
-```javascript
+```jsx
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import App from './app';
