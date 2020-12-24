@@ -8,6 +8,8 @@ rem（root em）是一个相对单位，类似于 em，==em== 是==父元素==�
 
 ## 2. 媒体查询
 
+CSS 媒体查询为我们提供了一种应用 CSS 的方法，仅在浏览器和设备的环境与你指定的规则相匹配的时候CSS 才会真的被应用。
+
 ### 2.1 什么是媒体查询
 
 媒体查询（Media Query）是 CSS3 新语法。
@@ -21,16 +23,25 @@ rem（root em）是一个相对单位，类似于 em，==em== 是==父元素==�
 
 ### 2.2 语法规范
 
+
+
 ```css
-@media mediatype and|not|only (media-feature-rule) {
-	css-Code;
+@media media-type and|not|only (media-feature-rule) {
+	/* CSS rules go here */
 }
 ```
 
 * 用 @media 开头，注意 @ 符号；
-* Mediatype  媒体类型；
+
+* media-type  媒体类型；
+
+  > 一个媒体类型，告诉浏览器这段代码是用在什么类型的媒体上的（例如印刷品或者屏幕）；
+
 * 关键字 and | not | only ；
-* media feature 媒体特性，必须有小括号包含。
+
+* media-feature-rule 媒体特性规则，必须有小括号包含。
+
+  > 一个媒体表达式，是一个被包含的CSS生效所需的规则或者测试；
 
 #### 2.2.1 mediatype 查询类型
 
@@ -231,6 +242,14 @@ width: (@width + 5) * 2;
 或者：页面元素的 rem 值 = 页面元素值（px）/ html font-size 字体大小
 
 （html font-size 大小：屏幕宽度 / 划分的份数）
+
+### 4.4 设置视窗标签
+
+```html
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" >
+```
+
+
 
 
 
