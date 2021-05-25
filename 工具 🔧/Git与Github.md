@@ -16,7 +16,6 @@
 >
 > * [Git 的诞生](https://www.liaoxuefeng.com/wiki/896043488029600/896202815778784)
 > * [Git 简史](https://git-scm.com/book/zh/v2/%E8%B5%B7%E6%AD%A5-Git-%E7%AE%80%E5%8F%B2)
->
 
 ### 2.Git 是什么？
 
@@ -26,7 +25,6 @@
 >
 > * [ Git 是什么？](https://git-scm.com/book/zh/v2/%E8%B5%B7%E6%AD%A5-Git-%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F)
 > * [Git 简介](https://www.liaoxuefeng.com/wiki/896043488029600/896067008724000)
->
 
 ## 第 2 章：GIt 的使用
 
@@ -291,6 +289,7 @@ origin	https://github.com/xxx/***.git (push)
 * 查看本地关联的远程库信息：`git remote -v`
 * 第一次将本地库推送到远程库：`git push -u origin master`
 * 之后每次推送本地库到远程库：`git push origin master`
+* 删除本地指定的远程地址：`git remote remove origin`
 
 ### 8. 分支管理
 
