@@ -153,6 +153,8 @@ git config -e --global # 针对系统上所有仓库
 
 * `git reset --hard <commit_id> ` 回退到指定 commit_id 的 commit id 版本。
 
+  > `git reset --soft <commit_id>`回退到指定版本，只回退了 commit 的信息。
+
 * `git reset HEAD <file>` 把暂存区的修改撤销掉（unstage），重新放回到工作区。
 
 * `git reset HEAD` 用**版本库**中的文件区替换**暂存区**的全部文件。
